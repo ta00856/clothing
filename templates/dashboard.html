@@ -1,0 +1,99 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <style>
+        /* Add custom CSS styles for the dashboard page */
+        .container {
+            display: flex; /* Use flexbox to create a two-column layout */
+            justify-content: space-between; /* Space the columns evenly */
+        }
+
+        .section {
+            flex: 1; /* Make each section take equal space in the column */
+            margin: 10px; /* Add some margin between sections */
+        }
+
+        .subsection {
+            display: none; /* Hide the subsections by default */
+            margin: 5px;
+        }
+
+        .active {
+            display: block; /* Show the active subsection */
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Dashboard</h1>
+
+    <div class="container">
+        <div class="section">
+            <h2>Men</h2>
+            <div class="subsection men-subsection">
+                <h3>T-Shirts</h3>
+                <!-- Add your content for Men T-Shirts section here -->
+                <!-- You can add images, products, links, etc. -->
+            </div>
+            <div class="subsection men-subsection">
+                <h3>Jeans</h3>
+                <!-- Add your content for Men Jeans section here -->
+                <!-- You can add images, products, links, etc. -->
+            </div>
+            <div class="subsection men-subsection">
+                <h3>Jackets</h3>
+                <!-- Add your content for Men Jackets section here -->
+                <!-- You can add images, products, links, etc. -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Women</h2>
+            <div class="subsection women-subsection">
+                <h3>Sari</h3>
+                <!-- Add your content for Women Sari section here -->
+                <!-- You can add images, products, links, etc. -->
+            </div>
+            <div class="subsection women-subsection">
+                <h3>Lipstick</h3>
+                <!-- Add your content for Women Lipstick section here -->
+                <!-- You can add images, products, links, etc. -->
+            </div>
+            <div class="subsection women-subsection">
+                <h3>Skirt</h3>
+                <!-- Add your content for Women Skirt section here -->
+                <!-- You can add images, products, links, etc. -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle the visibility of subsections
+        function toggleSubsections(section) {
+            var subsections = document.getElementsByClassName(section + "-subsection");
+            for (var i = 0; i < subsections.length; i++) {
+                subsections[i].classList.toggle("active");
+            }
+        }
+
+        // Add event listeners to Men and Women sections
+        document.querySelector(".section:nth-child(1) h2").addEventListener("click", function () {
+            toggleSubsections("men");
+        });
+
+        document.querySelector(".section:nth-child(2) h2").addEventListener("click", function () {
+            toggleSubsections("women");
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+

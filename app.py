@@ -10,7 +10,7 @@ app = Flask(__name__)
 # Define the route for the home page (root URL)
 @app.route('/')
 def home():
-    return render_template('register.html')
+    return render_template('login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -49,6 +49,8 @@ def register():
     # If the request method is GET, render the register page template
     return render_template('register.html')
 
+# ... (previous code)
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -79,19 +81,21 @@ def login():
         cursor.close()
         connection.close()
 
-        # If user_data is not None, the user exists, and we can proceed to the home page
+        # If user_data is not None, the user exists, and we can proceed to the dashboard
         if user_data is not None:
-            return "Login successful! Welcome, " + user_data[1]
+            return redirect('/dashboard')
         else:
             return "Invalid email or password. Please try again."
 
     # If the request method is GET, render the login page template
     return render_template('login.html')
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-    
-
     
