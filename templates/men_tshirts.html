@@ -1,1 +1,65 @@
-<h1> hello <h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Add custom CSS styles for alignment */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .tshirt-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tshirt-item {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .tshirt-image {
+            width: 300px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Add the content specific to the "Men T-Shirts" section -->
+    <h1>Men T-Shirts</h1>
+    <!-- Add any other content related to men's t-shirts -->
+
+    <!-- Form to select t-shirt size -->
+   
+        <div class="tshirt-container">
+            <!-- Display the first t-shirt image with a custom size -->
+            <div class="tshirt-item">
+                <img src="{{ url_for('static', filename='black.jpg') }}" alt="T-Shirt 1" class="tshirt-image">
+                <p>Price: $20</p>
+                <label for="size_tshirt1">Select size:</label>
+                <select name="size_tshirt1" id="size_tshirt1">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+            </div>
+
+            <!-- Display the second t-shirt image with a custom size -->
+            <div class="tshirt-item">
+                <img src="{{ url_for('static', filename='green.jpg') }}" alt="T-Shirt 2" class="tshirt-image">
+                <p>Price: $25</p>
+                <label for="size_tshirt2">Select size:</label>
+                <select name="size_tshirt2" id="size_tshirt2">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Submit button to add selected t-shirts to the cart -->
+        
+    
+</body>
+</html>
