@@ -94,6 +94,20 @@ def login():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/men_tshirts')
+def men_tshirts():
+    # You can add any necessary data processing logic here if needed
+    return render_template('men_tshirts.html')
+
+@app.route('/men_jeans')
+def men_jeans():
+    # You can add any necessary data processing logic here if needed
+    return render_template('men_jeans.html')
+
+@app.route('/men_jackets')
+def men_jackets():
+    # You can add any necessary data processing logic here if needed
+    return render_template('men_jackets.html')
 
 
 if __name__ == "__main__":
