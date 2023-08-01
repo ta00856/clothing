@@ -1,32 +1,97 @@
 import mysql.connector
-from flask import Flask
+from flask import Flask, render_template, request, redirect
+import mysql.connector
 
 app = Flask(__name__)
 
-def check_database_connection():
-    try:
-        # Replace 'your_host', 'your_user', 'your_password', and 'clothing' with your actual database credentials
+
+
+
+# Define the route for the home page (root URL)
+@app.route('/')
+def home():
+    return render_template('register.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        # Get the form data from the request
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+
+        # Establish a connection to the database
         connection = mysql.connector.connect(
             host='127.0.0.1',
             user='root',
             password='Kzzs@022704',
             database='clothing'
         )
-        connection.close()
-        return True
-    except mysql.connector.Error as err:
-        print(f"Error connecting to MySQL: {err}")
-        return False
 
-@app.route('/')
-def check_connection():
-    if check_database_connection():
-        return "Connection to the database successful!"
-    else:
-        return "Failed to connect to the database."
+        # Create a cursor to execute SQL queries
+        cursor = connection.cursor()
+
+        # Insert the user's data into the 'users' table
+        insert_query = "INSERT INTO users (name, email, password) VALUES (%s, %s, %s)"
+        data = (name, email, password)
+        cursor.execute(insert_query, data)
+
+        # Commit the changes to the database
+        connection.commit()
+
+        # Close the cursor and the database connection
+        cursor.close()
+        connection.close()
+
+        # Redirect to the login page after successful registration
+        return redirect('/login')
+
+    # If the request method is GET, render the register page template
+    return render_template('register.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # Get the form data from the request
+        email = request.form['email']
+        password = request.form['password']
+
+        # Establish a connection to the database
+        connection = mysql.connector.connect(
+            host='127.0.0.1',
+            user='root',
+            password='Kzzs@022704',
+            database='clothing'
+        )
+
+        # Create a cursor to execute SQL queries
+        cursor = connection.cursor()
+
+        # Check if the user's credentials exist in the 'users' table
+        select_query = "SELECT * FROM users WHERE email = %s AND password = %s"
+        data = (email, password)
+        cursor.execute(select_query, data)
+
+        # Fetch the user's data from the database
+        user_data = cursor.fetchone()
+
+        # Close the cursor and the database connection
+        cursor.close()
+        connection.close()
+
+        # If user_data is not None, the user exists, and we can proceed to the home page
+        if user_data is not None:
+            return "Login successful! Welcome, " + user_data[1]
+        else:
+            return "Invalid email or password. Please try again."
+
+    # If the request method is GET, render the login page template
+    return render_template('login.html')
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
     
-#tkdmsn d
+
     
